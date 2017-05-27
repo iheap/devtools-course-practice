@@ -6,26 +6,21 @@
 #include <cstdlib>
 #include <string>
 #include <vector>
-#include <stdexcept>
-#include <iostream>
 #include <cstring>
 #include <tuple>
-#include <utility>
 
 using std::vector;
 using std::string;
 using std::endl;
 using std::cerr;
 
-namespace {
-
-static std::pair<bool, double> TryParseDouble(const char *s) {
+std::pair<bool, double> ArithmeticCalculator::TryParseDouble(const char *s) {
     char *end = nullptr;
     double val = std::strtod(s, &end);
     return std::make_pair(end[0] == 0, val);
 }
 
-static void PrintHelp(const char *appname, std::ostream *ofs) {
+void ArithmeticCalculator::PrintHelp(const char *appname, std::ostream *ofs) {
     *ofs <<
     appname << ": a simple arithmetic calculator application. Usage:\n"
     "\n    " << appname << " <expr>"
@@ -38,14 +33,12 @@ static void PrintHelp(const char *appname, std::ostream *ofs) {
     "\n";
 }
 
-static std::ostream& PrintError(const char* appname) {
+std::ostream& ArithmeticCalculator::PrintError(const char* appname) {
     cerr << appname << ": error: ";
     return cerr;
 }
 
-}  // namespace
-
-int ArithmeticCalculator(int argc, const char * const *argv) {
+int ArithmeticCalculator::operator()(int argc, const char * const *argv) const {
     auto appname = argc > 0 ? argv[0] : "ArithmeticCalculator";
     if (argc <= 1) {
         PrintHelp(appname, &cerr);

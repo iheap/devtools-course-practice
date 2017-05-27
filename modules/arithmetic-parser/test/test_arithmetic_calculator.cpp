@@ -24,7 +24,7 @@ class ArithmeticCalculatorTest : public ::testing::Test {
         args.insert(args.begin(), "appname");
         testing::internal::CaptureStdout();
         testing::internal::CaptureStderr();
-        retcode_ = ArithmeticCalculator(static_cast<int>(args.size()),
+        retcode_ = app_(static_cast<int>(args.size()),
                                         args.data());
         out_ = testing::internal::GetCapturedStdout();
         err_ = testing::internal::GetCapturedStderr();
@@ -37,6 +37,7 @@ class ArithmeticCalculatorTest : public ::testing::Test {
     }
 
  private:
+    ArithmeticCalculator app_;
     int retcode_;
     string out_;
     string err_;
@@ -47,7 +48,7 @@ TEST_F(ArithmeticCalculatorTest, Do_Print_Help_Without_Arguments) {
 
     Act(args);
 
-    Assert(RESULT_BAD_ARGUMENTS,
+    Assert(ArithmeticCalculator::RESULT_BAD_ARGUMENTS,
            "",
            "appname: a simple arithmetic calculator application\\..*");
 }
@@ -57,7 +58,7 @@ TEST_F(ArithmeticCalculatorTest, Do_Print_Error_Wrong_Number_of_Arguments) {
 
     Act(args);
 
-    Assert(RESULT_BAD_ARGUMENTS,
+    Assert(ArithmeticCalculator::RESULT_BAD_ARGUMENTS,
            "",
            "appname: error: wrong number of arguments.*");
 }
@@ -67,7 +68,7 @@ TEST_F(ArithmeticCalculatorTest, Do_Print_Error_Cannot_Parse_Formal_Parameter) {
 
     Act(args);
 
-    Assert(RESULT_ERROR_PARSING,
+    Assert(ArithmeticCalculator::RESULT_ERROR_PARSING,
            "",
            "appname: error: cannot parse formal parameter.*");
 }
@@ -77,7 +78,7 @@ TEST_F(ArithmeticCalculatorTest, Do_Print_Error_Cannot_Parse_Expression) {
 
     Act(args);
 
-    Assert(RESULT_ERROR_PARSING,
+    Assert(ArithmeticCalculator::RESULT_ERROR_PARSING,
            "",
            "appname: error: cannot parse expression\n");
 }
@@ -87,7 +88,7 @@ TEST_F(ArithmeticCalculatorTest, Do_Print_Result_of_Simple_Expression) {
 
     Act(args);
 
-    Assert(RESULT_SUCESS,
+    Assert(ArithmeticCalculator::RESULT_SUCESS,
            "4",
            "");
 }
@@ -97,7 +98,7 @@ TEST_F(ArithmeticCalculatorTest, Do_Print_Result_of_Expression_With_Parameter) {
 
     Act(args);
 
-    Assert(RESULT_SUCESS,
+    Assert(ArithmeticCalculator::RESULT_SUCESS,
            "146",
            "");
 }

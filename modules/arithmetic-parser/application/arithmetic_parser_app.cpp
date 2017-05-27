@@ -5,5 +5,6 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
-    return ArithmeticCalculator(argc, argv);
+    ArithmeticCalculator app;
+    return app(argc, argv);
 }
