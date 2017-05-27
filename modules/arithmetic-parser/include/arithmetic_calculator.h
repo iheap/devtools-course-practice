@@ -7,8 +7,7 @@
 #include <iostream>
 
 
-class ArithmeticCalculator
-{
+class ArithmeticCalculator {
  public:
     enum ReturnCodes {
         RESULT_SUCESS = 0,
