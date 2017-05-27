@@ -6,6 +6,7 @@
 #include <utility>
 #include <iostream>
 
+
 class ArithmeticCalculator
 {
  public:
@@ -14,9 +15,10 @@ class ArithmeticCalculator
         RESULT_BAD_ARGUMENTS,
         RESULT_ERROR_PARSING
     };
+
     ArithmeticCalculator() = default;
     int operator()(int argc, const char *const *argv) const;
-
+ private:
     static std::pair<bool, double> TryParseDouble(const char *s);
     static void PrintHelp(const char *appname, std::ostream *ofs);
     static std::ostream& PrintError(const char* appname);
